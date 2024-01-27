@@ -1,0 +1,19 @@
+<main class="login-container">
+  <div class="bg-image"></div>
+  <article>
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <h3>Log In</h3>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input type="email" matInput [(ngModel)]="email" placeholder="Enter your email" name="email"> 
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input type="password" matInput [(ngModel)]="password" placeholder="Enter your password" name="password">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="login()">Log In</button>
+      </form>
+    </div>
+  </article>
+</main>
