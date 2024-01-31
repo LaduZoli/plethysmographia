@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
     // Ide írd meg a bejelentkezési logikát (például HTTP hívás stb.)
     console.log('Email:', this.email);
     console.log('Password:', this.password);
+
+    this.router.navigate(['user-home']);
   }
 
 }

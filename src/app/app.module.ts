@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
@@ -9,12 +10,13 @@ import { HomeComponent } from './core/home/home.component';
 import { FooterComponent } from './sharepage/footer/footer.component';
 import { NavbarComponent } from './sharepage/navbar/navbar.component';
 import { LoginComponent } from './core/login/login.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
+import { MaterialModule } from './material-module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SidenavComponent } from './sharepage/sidenav/sidenav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { UserHomeComponent } from './core/user/user-home/user-home.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -25,18 +27,19 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HomeComponent,
     FooterComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    SidenavComponent,
+    UserHomeComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    MatIconModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule,
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
