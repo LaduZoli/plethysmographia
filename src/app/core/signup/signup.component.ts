@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
-
+export class SignupComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   password: string = '';
   hide = true;
@@ -18,7 +17,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login() {
+  signup() {
     // Ide írd meg a bejelentkezési logikát (például HTTP hívás stb.)
     console.log('Email:', this.email);
     console.log('Password:', this.password);
@@ -33,5 +32,4 @@ export class LoginComponent implements OnInit {
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
-
 }

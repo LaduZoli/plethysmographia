@@ -1,0 +1,40 @@
+<main class="signup">
+    <div class="signup">
+      <article>
+        <div class="box">
+          <form class="signup-form">
+            <h3>Sign Up</h3>
+            <mat-form-field class="w-100">
+              <mat-label>Enter your email</mat-label>
+              <input matInput placeholder="pat@example.com" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field>
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <mat-form-field class="w-150">
+              <mat-label>Enter your password again</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+  
+            <button class="w-100" mat-raised-button color="primary" (click)="signup()">Sign Up</button>
+  
+            <a class="pt-4 mat-h5" routerLink="/login">LOG IN</a>
+          </form>
+        </div>
+      </article>
+    </div>
+  
+    <div class="image-container">
+      <img src="../../../assets/images/heart.jpg">
+    </div>
+  </main>

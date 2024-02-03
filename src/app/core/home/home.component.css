@@ -8,9 +8,15 @@ img {
     height: 60vh;
     position: absolute;
     top: 100px;
-    left: 5px;    
+    left: 5px;  
+    z-index: 0;  
 }
 
+.text {
+    z-index: 2;
+    position: relative;
+
+}
 p, h1 {
     color:  white;
 }
