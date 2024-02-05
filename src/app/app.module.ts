@@ -17,6 +17,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { UserHomeComponent } from './core/user/user-home/user-home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './core/signup/signup.component';
+import { SharedService } from './service/shared.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { SignupComponent } from './core/signup/signup.component';
     MaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

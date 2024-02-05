@@ -1,8 +1,6 @@
 .footer
 {
-    overflow: hidden;
-    position: sticky;
-    top: 100%;
+    margin-top: 10px;
     color:#000000;
 }
 

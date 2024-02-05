@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
+import { SharedService } from '../../service/shared.service';
+
 
 @Component({
   selector: 'app-login',
@@ -13,9 +15,10 @@ export class LoginComponent implements OnInit {
   password: string = '';
   hide = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private sharedService: SharedService) { }
 
   ngOnInit(): void {
+    this.sharedService.toggleSidenavVisibility(false); 
   }
 
   login() {

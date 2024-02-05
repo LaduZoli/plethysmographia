@@ -1,14 +1,22 @@
-<mat-toolbar color="warn" class="mat-elevation-z8">
+<mat-toolbar color="warn" class="mat-elevation-z8" style="display: flex; justify-content: space-between; align-items: center;">
   <button (click)="drawer.toggle()" mat-icon-button>
       <mat-icon>menu</mat-icon>
   </button>
-  <span>Plethysmography Diagnostics</span>
-  <span class="example-spacer"></span>
-  <button class="p-3 m-2" routerLink="/home" mat-button>Home</button>
-  <button class="p-3 m-2" routerLink="/login" mat-raised-button color="primary">Log In</button>
-  <button class="p-3 m-2" routerLink="/signup" mat-raised-button color="accent">Sign Up</button>
-  
+  <span>Pleth Diagnostics</span>
+  <span style="display: flex; align-items: center;">
+    <mat-icon matBadge="15" matBadgeColor="primary">email</mat-icon>
+    <span style="margin-left: 40px;"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon class="person-icon" aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>Profile</button>
+    <button mat-menu-item>Log Out</button>
+    </mat-menu>
+    <span style="margin-left: 40px;"></span>
+  </span>
 </mat-toolbar>
+
 <mat-drawer-container autosize>
   <mat-drawer #drawer opened="true" mode="side" position="start">
   <mat-nav-list>
@@ -41,8 +49,5 @@
         <router-outlet></router-outlet>
 
     </div>
-
-        <app-footer></app-footer>
-
-</mat-drawer-content>
+  </mat-drawer-content>
 </mat-drawer-container>

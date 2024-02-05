@@ -10,4 +10,8 @@ export class SidenavComponent {
   badgevisibility() {
     this.badgevisible = true;
   }
+
+  shouldShowSidenav() :boolean {
+    return true;
+  }
 }

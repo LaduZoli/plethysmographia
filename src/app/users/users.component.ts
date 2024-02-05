@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../../app/service/shared.service';
 
 @Component({
   selector: 'app-users',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService: SharedService) {}
 
   ngOnInit(): void {
+    this.sharedService.toggleSidenavVisibility(true); 
   }
 
 }
