@@ -1,4 +1,8 @@
 .example-spacer {
     flex: 1 1 auto;
-  }
-  
+}
+
+.button-margin {
+  margin-left: 15px; 
+  margin-right: 15px; 
+}

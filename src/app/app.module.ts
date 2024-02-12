@@ -42,7 +42,8 @@ import { SharedService } from './service/shared.service';
     ReactiveFormsModule,
     LayoutModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    LayoutModule
   ],
   providers: [SharedService],
   bootstrap: [AppComponent]

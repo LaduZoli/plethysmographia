@@ -1,18 +1,23 @@
-div.home {
+.mat-container {
     background-image: url("../../../assets/images/image.png");
     background-color: black;
     background-size: 20%;
     background-repeat: no-repeat; 
-    height: 90vh;
-    background-position: 85% 30%;   
+    background-position: 85% 30%;
+    height: calc(100vh - 60px);   
 }
 
-.text {
-    z-index: 1;
-    position: relative;
-    text-align: justify;
-
+.mat-container h1 {
+    color: white;
+    padding: 35px;
+    margin: 0;
 }
-p, h1 {
-    color:  white;
+
+.mat-container p {
+    color: white;
+    line-height: 1.8;
+    letter-spacing: 0.2em; 
+    font-size: 1.01em;
+    padding-left: 25px;
+    margin: 0;
 }
