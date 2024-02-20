@@ -18,7 +18,9 @@ import { UserHomeComponent } from './core/user/user-home/user-home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './core/signup/signup.component';
 import { SharedService } from './service/shared.service';
-
+import { AngularFireModule } from '@angular/fire/compat'; // Firebase modul importálása
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'; // 
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,9 +45,24 @@ import { SharedService } from './service/shared.service';
     LayoutModule,
     MaterialModule,
     HttpClientModule,
-    LayoutModule
+    LayoutModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule 
   ],
   providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+function provideFirebaseApp(arg0: () => import("@firebase/app").FirebaseApp): any[] | import("@angular/core").Type<any> | import("@angular/core").ModuleWithProviders<{}> {
+  throw new Error('Function not implemented.');
+}
+
+function provideAuth(arg0: () => any): any[] | import("@angular/core").Type<any> | import("@angular/core").ModuleWithProviders<{}> {
+  throw new Error('Function not implemented.');
+}
+
+function getAuth(): any {
+  throw new Error('Function not implemented.');
+}
+
