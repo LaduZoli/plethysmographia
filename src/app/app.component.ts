@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from './service/shared.service';
 import { Observable } from 'rxjs';
+import { AuthService } from './service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
+  loggedInUser?: firebase.default.User | null; 
+
   shouldShowSidenav$: Observable<boolean> | null = null;
 
-  constructor(private sharedService: SharedService) {}
+  constructor(private sharedService: SharedService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.shouldShowSidenav$ = this.sharedService.shouldShowSidenav$;

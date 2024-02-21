@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { SharedService } from '../../service/shared.service';
 import { AuthService } from 'src/app/service/auth.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +22,8 @@ export class SignupComponent implements OnInit {
     private router: Router, 
     private sharedService: SharedService,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
     ) { }
 
   ngOnInit(): void {
@@ -50,18 +52,26 @@ export class SignupComponent implements OnInit {
     this.isRegistering = true;
     this.registerError = false;
 
-    this.authService.register(
+  this.authService.register(
+    this.registerForm.value.name,
+    this.registerForm.value.email,
+    this.registerForm.value.password
+  ).subscribe(() => {
+    this.userService.addUser(
       this.registerForm.value.name,
       this.registerForm.value.email,
-      this.registerForm.value.password
-    ).subscribe(() => {
-      // Sikeres regisztráció esetén további műveletek (pl. átirányítás)
+    ).then(() => {
       this.router.navigate(['login']);
-    },
-    (error) => {
-      console.error('Registration failed:', error);
+    }).catch(error => {
+      console.error('Failed to add user to database:', error);
       this.isRegistering = false;
       this.registerError = true;
     });
+  },
+  (error) => {
+    console.error('Registration failed:', error);
+    this.isRegistering = false;
+    this.registerError = true;
+  });
   }
 }

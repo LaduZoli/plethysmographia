@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, from, Observable, throwError  } from 'rxjs';
+import { catchError, from, map, Observable, throwError  } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
@@ -39,6 +39,14 @@ export class AuthService {
           observer.complete();
         });
     });
+  }
+
+  isLoggedIn() {
+    return this.auth.authState.pipe(map(user => !!user));
+  }
+
+  logout() {
+    return this.auth.signOut();
   }
 
   private translateFirebaseErrorMessage({code, message}: FirebaseError) {

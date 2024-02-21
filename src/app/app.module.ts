@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UsersComponent } from './users/users.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CoreComponent } from './core/core.component';
 import { HomeComponent } from './core/home/home.component';
@@ -18,14 +17,16 @@ import { UserHomeComponent } from './core/user/user-home/user-home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './core/signup/signup.component';
 import { SharedService } from './service/shared.service';
-import { AngularFireModule } from '@angular/fire/compat'; // Firebase modul importálása
-import { AngularFireAuthModule } from '@angular/fire/compat/auth'; // 
+import { AngularFireModule } from '@angular/fire/compat'; 
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'; 
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore/'; 
 import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
     PageNotFoundComponent,
     CoreComponent,
     HomeComponent,
@@ -48,8 +49,10 @@ import { environment } from '../environments/environment';
     LayoutModule,
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule 
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
+  exports: [RouterModule],
   providers: [SharedService],
   bootstrap: [AppComponent]
 })
