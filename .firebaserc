@@ -1,4 +1,13 @@
 {
+  "targets": {
+    "plethysmographia": {
+      "hosting": {
+        "plethysmograph": [
+          "plethysmographia"
+        ]
+      }
+    }
+  },
   "projects": {
     "default": "plethysmographia"
   }

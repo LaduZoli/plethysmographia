@@ -19,7 +19,7 @@ import { SignupComponent } from './core/signup/signup.component';
 import { SharedService } from './service/shared.service';
 import { AngularFireModule } from '@angular/fire/compat'; 
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'; 
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore/'; 
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; 
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 
@@ -47,7 +47,6 @@ import { RouterModule } from '@angular/router';
     MaterialModule,
     HttpClientModule,
     LayoutModule,
-    AngularFireModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule
