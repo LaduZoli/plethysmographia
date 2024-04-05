@@ -1,7 +1,24 @@
-.card-class{
-    margin: 3%;
-    width: 18%;
-    text-align: left;
-    float: left;
-}
+.card-class {
+    width: 300px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 16px;
+  }
+  
+  .bluetooth-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .bluetooth-button:hover {
+    background-color: #0056b3;
+  }
   

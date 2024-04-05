@@ -51,27 +51,31 @@ export class SignupComponent implements OnInit {
   register() {
     this.isRegistering = true;
     this.registerError = false;
-
-  this.authService.register(
-    this.registerForm.value.name,
-    this.registerForm.value.email,
-    this.registerForm.value.password
-  ).subscribe(() => {
-    this.userService.addUser(
+  
+    this.authService.register(
       this.registerForm.value.name,
       this.registerForm.value.email,
-    ).then(() => {
-      this.router.navigate(['login']);
-    }).catch(error => {
-      console.error('Failed to add user to database:', error);
+      this.registerForm.value.password
+    ).subscribe((userData: any) => {
+      const userUid = userData.user.uid; // Firebase Authentication által visszaadott UID
+      const userName = this.registerForm.value.name;
+      const userEmail = this.registerForm.value.email;
+  
+      // Most létrehozhatod a felhasználó dokumentumot a Firestore-ban
+      this.userService.addUser(userUid, userName, userEmail)
+        .then(() => {
+          this.router.navigate(['login']);
+        })
+        .catch(error => {
+          console.error('Failed to add user to database:', error);
+          this.isRegistering = false;
+          this.registerError = true;
+        });
+    },
+    (error) => {
+      console.error('Registration failed:', error);
       this.isRegistering = false;
       this.registerError = true;
     });
-  },
-  (error) => {
-    console.error('Registration failed:', error);
-    this.isRegistering = false;
-    this.registerError = true;
-  });
   }
 }

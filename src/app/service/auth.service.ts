@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { catchError, from, map, Observable, throwError  } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,11 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthService {
 
   constructor(
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private userService: UserService
   ) { }
+
+  
 
   login(params: LogIn): Observable<any> {
     return from(this.auth.signInWithEmailAndPassword(
@@ -25,13 +29,31 @@ export class AuthService {
     return new Observable((observer) => {
       this.auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // Sikeres regisztráció esetén a felhasználó bejelentkeztetése vagy más műveletek
-          // Például: felhasználó név beállítása
-          userCredential.user?.updateProfile({
-            displayName: name
-          });
-          observer.next(userCredential);
-          observer.complete();
+          const userUid = userCredential.user?.uid; // Firebase Authentication által visszaadott UID
+          if (userUid) { // Ellenőrizzük, hogy userUid nem undefined
+            // Sikeres regisztráció esetén a felhasználó bejelentkeztetése vagy más műveletek
+            // Például: felhasználó név beállítása
+            userCredential.user?.updateProfile({
+              displayName: name
+            }).then(() => {
+              // Felhasználó regisztrálása a Firestore-ban
+              this.userService.addUser(userUid, name, email)
+                .then(() => {
+                  observer.next(userCredential);
+                  observer.complete();
+                })
+                .catch((error) => {
+                  observer.error(error);
+                  observer.complete();
+                });
+            }).catch((error) => {
+              observer.error(error);
+              observer.complete();
+            });
+          } else {
+            observer.error("A felhasználó azonosítója nem érvényes.");
+            observer.complete();
+          }
         })
         .catch((error) => {
           // Hiba kezelése regisztráció közben
@@ -40,6 +62,7 @@ export class AuthService {
         });
     });
   }
+  
 
   isLoggedIn() {
     return this.auth.authState.pipe(map(user => !!user));

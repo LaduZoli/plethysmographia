@@ -8,13 +8,12 @@ export class UserService {
 
   constructor(private auth: AngularFirestore) { }
 
-  addUser(name: string, email: string): Promise<void> {
-    const id = this.auth.createId();
-    
-    return this.auth.collection('Users').doc(id).set({
-      id: id,
+  addUser(uid: string, name: string, email: string): Promise<void> {
+    return this.auth.collection('Users').doc(uid).set({
+      id: uid, // Az UID-t használjuk
       name: name,
       email: email,
     });
   }
+  
 }
