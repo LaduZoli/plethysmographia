@@ -6,6 +6,7 @@
 /out-tsc
 /bazel-out
 /src/environments/
+/functions/serviceAccountKey.json
 
 # Node
 /node_modules

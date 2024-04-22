@@ -1,53 +1,54 @@
-<mat-toolbar color="warn" class="mat-elevation-z8">
-  <button (click)="drawer.toggle()" mat-icon-button>
-      <mat-icon>menu</mat-icon>
-  </button>
-  <span>Pleth Diagnostics</span>
-  <span style="display: flex; align-items: center;">
-    <mat-icon matBadge="15" matBadgeColor="primary">email</mat-icon>
-    <span style="margin-left: 40px;"></span>
-    <button mat-button [matMenuTriggerFor]="menu">
-        <mat-icon class="person-icon" aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item>Profile</button>
-    <button mat-menu-item (click)="logout()">Log Out</button>
-    </mat-menu>
-    <span style="margin-left: 10px;"></span>
-  </span>
-</mat-toolbar>
+<div style="background-color: black; height: 100vh; display: flex; flex-direction: column;">
+    <mat-toolbar color="warn" class="mat-elevation-z8"  style="height: 60px">
+      <button (click)="drawer.toggle()" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+      </button>
+      <span>Pleth Diagnostics</span>
+      <span style="display: flex; align-items: center;">
+        {{ userDisplayName | async }}
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon class="person-icon" aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Profil</button>
+        <button mat-menu-item (click)="logout()">Kijelentkezés</button>
+        </mat-menu>
+        <span style="margin-left: 10px;"></span>
+      </span>
+    </mat-toolbar>
 
-<mat-drawer-container autosize>
-  <mat-drawer #drawer opened="true" mode="side" position="start">
-  <mat-nav-list>
-      <mat-list-item>
-          <button routerLink="card" mat-button><mat-icon>dashboard</mat-icon> Dashboard</button>
-      </mat-list-item>
-      <mat-list-item>
-          <button routerLink="" mat-button><mat-icon>home</mat-icon> Home</button>
-      </mat-list-item>
-      <mat-list-item>
-          <button routerLink="slider" mat-button><mat-icon>explore</mat-icon> Slider</button>
-      </mat-list-item>
-      <mat-list-item>
-          <button routerLink="table" mat-button><mat-icon>table</mat-icon> Table</button>
-      </mat-list-item>
-      <mat-list-item>
-          <button mat-button><mat-icon>settings</mat-icon> Settings</button>
-      </mat-list-item>
-      <mat-list-item>
-          <button mat-button><mat-icon>help</mat-icon> Help</button>
-      </mat-list-item>
-      <mat-list-item>
-          <button mat-button><mat-icon>analytics</mat-icon> analytics</button>
-      </mat-list-item>
-  </mat-nav-list>
-  </mat-drawer>
-  <mat-drawer-content>
-    <div style="text-align: center;max-height: 600px;">
+    <mat-drawer-container autosize style="flex-grow: 1;">
+      <mat-drawer #drawer opened="true" mode="side" position="start">
+      <mat-nav-list>
+          <mat-list-item>
+              <button routerLink="/user-home" mat-button><mat-icon>dashboard</mat-icon> Kezdőoldal</button>
+          </mat-list-item>
+          <mat-list-item>
+              <button routerLink="/user-measurements" mat-button><mat-icon>list</mat-icon> Mérések lista</button>
+          </mat-list-item>
+          <mat-list-item>
+              <button routerLink="slider" mat-button><mat-icon>explore</mat-icon> Slider</button>
+          </mat-list-item>
+          <mat-list-item>
+              <button routerLink="table" mat-button><mat-icon>table</mat-icon> Table</button>
+          </mat-list-item>
+          <mat-list-item>
+              <button mat-button><mat-icon>settings</mat-icon> Settings</button>
+          </mat-list-item>
+          <mat-list-item>
+              <button mat-button><mat-icon>help</mat-icon> Help</button>
+          </mat-list-item>
+          <mat-list-item>
+              <button mat-button><mat-icon>analytics</mat-icon> analytics</button>
+          </mat-list-item>
+      </mat-nav-list>
+      </mat-drawer>
+      <mat-drawer-content style=" background-color: black;  flex-grow: 1;">
+        <div style="height: 100%;">
 
-        <router-outlet></router-outlet>
+            <router-outlet></router-outlet>
 
-    </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+        </div>
+      </mat-drawer-content>
+    </mat-drawer-container>
+<div>

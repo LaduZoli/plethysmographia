@@ -22,6 +22,10 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; 
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
+import { BaseChartDirective } from 'ng2-charts';
+import { CalendarModule, DateAdapter } from 'angular-calendar'; // Importáld be a CalendarModule-t
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns'; // Importálja be a date adapter factory-t
+import { MeasurementsListComponent } from './core/user/measurements-list/measurements-list.component'
 
 
 @NgModule({
@@ -36,6 +40,7 @@ import { RouterModule } from '@angular/router';
     SidenavComponent,
     UserHomeComponent,
     SignupComponent,
+    MeasurementsListComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,12 @@ import { RouterModule } from '@angular/router';
     LayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    BaseChartDirective,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   exports: [RouterModule],
   providers: [SharedService],

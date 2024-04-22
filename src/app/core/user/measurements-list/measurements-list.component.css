@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
+
+mat-card {
+  border-radius: 15px; /* Nagyobb sugárú sarkok */
+  box-shadow: 0px 8px 84px rgba(255, 0, 0, 0.5);
+  transition: transform 0.3s ease; /* Animáció a hoverre */
+  display: flex;
+}
+
+.measurement-table {
+  max-width: 100%; /* Maximális szélesség beállítása a szülőelemhez képest */
+  width: 1000px; /* Például az oldal 90%-ának kitöltése */
+}
+  

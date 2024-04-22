@@ -1,73 +1,44 @@
+<div class="container" *ngIf="dataLoaded">
+  <div class="card-wrapper">
+    
+    <mat-card class="chart-card">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </mat-card>
+    
+    <mat-card class="pulse-info">
+      <div class="time-label">
+        <span>Mérés ideje:</span>
+        <span>{{ lastMeasurementTime }}</span>
+      </div>
+      <div class="pulse-content">
+        <div class="pulse-icon">
+          <mat-icon class="heart-icon">favorite</mat-icon> <!-- Szív ikon -->
+        </div>
+        <div class="pulse-value">
+          {{ lastPulse }} <!-- Utolsó mért pulzus eredménye -->
+        </div>
+      </div>
+    </mat-card>
 
-<mat-card class="card-class">
-    <mat-card-header>
-        <mat-card-title>Nihira Techiees</mat-card-title>
-        <mat-card-subtitle>Angular 15 - Material UI</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-sm-image src="https://angular.io/assets/images/logos/angular/angular.svg"/>
-    <mat-card-content>
-        <p>
-            Angular is an application-design framework and development platform for creating efficient and sophisticated single-page apps.
-        </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
-        <button mat-button><mat-icon>share</mat-icon> Share</button>
-    </mat-card-actions>
-    <mat-card-footer></mat-card-footer>
-</mat-card>
+    <mat-card class="data-info">
+      <div class="data-item">
+        A mai nap mért adatok száma: <span>{{ todaysMeasurementCount }}</span>
+      </div>
+      <div class="data-item">
+        A héten mért adatok száma: <span>{{ weeklyMeasurementCount }}</span>
+      </div>
+      <div class="data-item">
+        Összes mérések száma: <span>{{ totalMeasurementCount }}</span>
+      </div>
+    </mat-card>
 
-<mat-card class="card-class">
-    <mat-card-header>
-        <mat-card-title>Nihira Techiees</mat-card-title>
-        <mat-card-subtitle>Angular 15 - Material UI</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-md-image src="https://angular.io/assets/images/logos/angular/angular.svg"/>
-    <mat-card-content>
-        <p>
-            Angular is an application-design framework and development platform for creating efficient and sophisticated single-page apps.
-        </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
-        <button mat-button><mat-icon>share</mat-icon> Share</button>
-    </mat-card-actions>
-    <mat-card-footer></mat-card-footer>
-</mat-card>
-
-<mat-card class="card-class">
-    <mat-card-header>
-        <mat-card-title>Nihira Techiees</mat-card-title>
-        <mat-card-subtitle>Angular 15 - Material UI</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-lg-image src="https://angular.io/assets/images/logos/angular/angular.svg"/>
-    <mat-card-content>
-        <p>
-            Angular is an application-design framework and development platform for creating efficient and sophisticated single-page apps.
-        </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
-        <button mat-button><mat-icon>share</mat-icon> Share</button>
-    </mat-card-actions>
-    <mat-card-footer></mat-card-footer>
-</mat-card>
-
-<br>
-<mat-card class="card-class">
-    <mat-card-header>
-        <mat-card-title>Nihira Techiees</mat-card-title>
-        <mat-card-subtitle>Angular 15 - Material UI</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://angular.io/assets/images/logos/angular/angular.svg"/>
-    <mat-card-content>
-        <p>
-            Angular is an application-design framework and development platform for creating efficient and sophisticated single-page apps.
-        </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
-        <button mat-button><mat-icon>share</mat-icon> Share</button>
-    </mat-card-actions>
-    <mat-card-footer></mat-card-footer>
-</mat-card>
+    <mat-card class="average-pulse">
+      <mat-card-content>
+        <p>Átlagos pulzus: {{ averagePulse }}</p>
+        <p>Szórás: {{ pulseVariance }}</p>
+        <p>Max: {{ maxPulse }}</p>
+        <p>Min: {{ minPulse }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

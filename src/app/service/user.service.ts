@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  firestore: any;
 
   constructor(private auth: AngularFirestore) { }
 
@@ -14,6 +16,10 @@ export class UserService {
       name: name,
       email: email,
     });
+  }
+
+  getUser(uid: string): Observable<any> {
+    return this.auth.collection('Users').doc(uid).valueChanges();
   }
   
 }

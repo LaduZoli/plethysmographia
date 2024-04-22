@@ -1,24 +1,89 @@
-.card-class {
-    width: 300px;
-    margin: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.container {
+  padding: 20px;
+}
+
+.card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Rugalmasan igazítjuk a kártyák szélességét */
+  gap: 50px; /* Térköz a grid elemek között */
+}
+
+
+.mat-card {
+  border-radius: 15px;
+  box-shadow: 0px 8px 84px rgba(255, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.mat-card:hover {
+  transform: translateY(-5px);
+}
+
+.chart-card {
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+.pulse-info {
+  padding: 20px;
+  background-color: #ffffff;
+  display: grid;
+  place-items: center; /* Középre igazítás */
+}
+
+.time-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.pulse-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-icon {
+  margin-right: 5px;
+}
+
+.heart-icon {
+  color: red;
+}
+
+.pulse-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.data-info {
+  padding: 20px;
+}
+
+.data-item {
+  font-size: 16px;
+}
+
+.data-item span {
+  font-weight: bold;
+}
+
+.average-pulse {
+  font-weight: bold;
+}
+
+.average-pulse-container {
+  position: sticky;
+  top: 250px;
+  right: 500px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr; /* Egy oszlop kisebb kijelzőkön */
+    padding: 20px; /* Térköz a konténer és a kijelző szél között */
   }
-  
-  .card-title {
-    font-size: 20px;
-    font-weight: bold;
+
+  .card-wrapper {
+    grid-template-columns: 1fr; /* Egy oszlop kisebb kijelzőkön */
   }
-  
-  .card-text {
-    font-size: 16px;
-  }
-  
-  .bluetooth-button {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .bluetooth-button:hover {
-    background-color: #0056b3;
-  }
-  
+}

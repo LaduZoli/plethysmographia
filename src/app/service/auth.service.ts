@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { catchError, from, map, Observable, throwError  } from 'rxjs';
+import { catchError, from, map, Observable, of, take, switchMap, throwError  } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserService } from './user.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,25 @@ export class AuthService {
     private userService: UserService
   ) { }
 
-  
+   // Ezzel a metódussal lekérheted a bejelentkezett felhasználó nevét
+   getUserDisplayName(): Observable<string> {
+    return this.auth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.userService.getUser(user.uid).pipe(
+            map(userData => userData.name),
+            take(1)
+          );
+        } else {
+          return of('N/A');
+        }
+      })
+    );
+  }
+
+  getCurrentUserUid(): Observable<string | null> {
+    return this.auth.authState.pipe(map(user => user ? user.uid : null));
+  }
 
   login(params: LogIn): Observable<any> {
     return from(this.auth.signInWithEmailAndPassword(

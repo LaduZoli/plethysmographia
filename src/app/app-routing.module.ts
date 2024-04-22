@@ -5,6 +5,7 @@ import { LoginComponent } from './core/login/login.component';
 import { SignupComponent } from './core/signup/signup.component';
 import { UserHomeComponent } from './core/user/user-home/user-home.component';
 import { AuthGuard } from './service/auth.guard';
+import { MeasurementsListComponent } from './core/user/measurements-list/measurements-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -12,6 +13,8 @@ const routes: Routes = [
   { path: 'login', component:LoginComponent},
   { path: 'signup', component:SignupComponent},
   { path: 'user-home', component:UserHomeComponent, canActivate: [AuthGuard]},
+  { path: 'user-measurements', component:MeasurementsListComponent, canActivate: [AuthGuard]},
+
 ];
 
 @NgModule({
