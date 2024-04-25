@@ -25,8 +25,10 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   public lastPulse: number = 0;
   public lastMeasurementTime: string = '';
 
+  public hourlysMeasurementCount: number = 0;
   public todaysMeasurementCount: number = 0;
   public weeklyMeasurementCount: number = 0;
+  public monthlysMeasurementCount: number = 0;
   public totalMeasurementCount: number = 0;
 
   // Az összes mérés átlagpulzusa
@@ -54,6 +56,10 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
             return a.timestamp.toDate() - b.timestamp.toDate();
           });
 
+          this.measurementService.getMeasurementsForCurrentHour(currentUserUid).subscribe(measurements => {
+            this.hourlysMeasurementCount = measurements.length;
+          });
+
           // A mai nap méréseinek száma
           this.measurementService.getTodaysMeasurements(currentUserUid).subscribe(measurements => {
             this.todaysMeasurementCount = measurements.length;
@@ -62,6 +68,10 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
           // A héten mért adatok száma
           this.measurementService.getWeeklyMeasurements(currentUserUid).subscribe(measurements => {
             this.weeklyMeasurementCount = measurements.length;
+          });
+
+          this.measurementService.getMeasurementsForCurrenttMonth(currentUserUid).subscribe(measurements => {
+            this.monthlysMeasurementCount = measurements.length;
           });
         
           // Összes mérések száma

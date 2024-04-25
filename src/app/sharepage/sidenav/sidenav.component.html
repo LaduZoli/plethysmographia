@@ -3,7 +3,7 @@
       <button (click)="drawer.toggle()" mat-icon-button>
           <mat-icon>menu</mat-icon>
       </button>
-      <span>Pleth Diagnostics</span>
+      <span>Pulzus Diagnosztika</span>
       <span style="display: flex; align-items: center;">
         {{ userDisplayName | async }}
         <button mat-button [matMenuTriggerFor]="menu">
@@ -25,21 +25,6 @@
           </mat-list-item>
           <mat-list-item>
               <button routerLink="/user-measurements" mat-button><mat-icon>list</mat-icon> Mérések lista</button>
-          </mat-list-item>
-          <mat-list-item>
-              <button routerLink="slider" mat-button><mat-icon>explore</mat-icon> Slider</button>
-          </mat-list-item>
-          <mat-list-item>
-              <button routerLink="table" mat-button><mat-icon>table</mat-icon> Table</button>
-          </mat-list-item>
-          <mat-list-item>
-              <button mat-button><mat-icon>settings</mat-icon> Settings</button>
-          </mat-list-item>
-          <mat-list-item>
-              <button mat-button><mat-icon>help</mat-icon> Help</button>
-          </mat-list-item>
-          <mat-list-item>
-              <button mat-button><mat-icon>analytics</mat-icon> analytics</button>
           </mat-list-item>
       </mat-nav-list>
       </mat-drawer>

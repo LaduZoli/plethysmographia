@@ -6,16 +6,21 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Rugalmasan igazítjuk a kártyák szélességét */
   gap: 50px; /* Térköz a grid elemek között */
+  justify-content: space-between; 
 }
 
 
-.mat-card {
-  border-radius: 15px;
-  box-shadow: 0px 8px 84px rgba(255, 0, 0, 0.5);
+mat-card {
+  border-radius: 24px;
+  box-shadow: 0 4px 8px 0 rgba(255, 0, 0, 0.849), 0 6px 20px 0 rgb(255, 0, 0);
   transition: transform 0.3s ease;
 }
 
-.mat-card:hover {
+.card-wrapper > mat-card:nth-child(4) {
+  grid-column: 2 / 3; /* A negyedik elem legyen a második oszlopban */
+}
+
+mat-card:hover {
   transform: translateY(-5px);
 }
 
@@ -32,7 +37,17 @@
 }
 
 .time-label {
-  font-size: 14px;
+  font-size: 18px;
+  display: flex; /* Flexbox elrendezés */
+  flex-direction: column; /* Tartalmat oszlopos elrendezésre állítjuk be */
+  align-items: center; /* Elemek középre igazítása a függőleges tengelyen */
+}
+
+.measurement-time {
+  display: block;
+  padding-top: 25px;
+  align-items: center;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -43,24 +58,30 @@
 }
 
 .pulse-icon {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .heart-icon {
   color: red;
+  font-size: 26px;
 }
 
 .pulse-value {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: bold;
 }
 
 .data-info {
   padding: 20px;
+  display: flex;
+  justify-content: center; /* Tartalom középre igazítása */
+  align-items: center; /* Elemek középre igazítása a függőleges tengelyen */
+  text-align: center; /* Szöveg középre igazítása */
 }
 
 .data-item {
   font-size: 16px;
+  margin-bottom: 10px; /* Térköz a data-item elemek között */
 }
 
 .data-item span {
@@ -68,22 +89,45 @@
 }
 
 .average-pulse {
-  font-weight: bold;
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Tartalom középre igazítása */
+  align-items: center; /* Elemek középre igazítása a függőleges tengelyen */
+  text-align: center; /* Szöveg középre igazítása */
 }
 
-.average-pulse-container {
-  position: sticky;
-  top: 250px;
-  right: 500px;
+.average-pulse p {
+  font-size: 16px;
+  margin-bottom: 10px; /* Térköz a bekezdések között */
+}
+
+.bold {
+  font-weight: bold; /* Csak a vastag betűs elemek számára */
+}
+
+.average-pulse p:last-child {
+  margin-bottom: 0; /* Az utolsó bekezdésnek nincs alsó térköz */
+}
+
+.average-pulse-content {
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
   .container {
-    grid-template-columns: 1fr; /* Egy oszlop kisebb kijelzőkön */
-    padding: 20px; /* Térköz a konténer és a kijelző szél között */
+    grid-template-columns: 1fr;
+    padding: 20px;
   }
 
   .card-wrapper {
-    grid-template-columns: 1fr; /* Egy oszlop kisebb kijelzőkön */
+    display: flex;
+    flex-wrap: wrap; /* Hozzáadva: törjön sort, ha elfogy a hely */
+    justify-content: center;
+  }
+
+  mat-card {
+    margin-bottom: 20px;
+    text-align: center;
+    width: calc(100% - 20px); /* Hozzáadva: a kártyák teljes szélessége a térközök miatt */
   }
 }

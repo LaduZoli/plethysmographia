@@ -26,7 +26,9 @@ import { BaseChartDirective } from 'ng2-charts';
 import { CalendarModule, DateAdapter } from 'angular-calendar'; // Importáld be a CalendarModule-t
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns'; // Importálja be a date adapter factory-t
 import { MeasurementsListComponent } from './core/user/measurements-list/measurements-list.component'
-
+import { MatSortModule } from '@angular/material/sort';
+import { ExportAsModule } from 'ngx-export-as';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -59,10 +61,12 @@ import { MeasurementsListComponent } from './core/user/measurements-list/measure
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    MatSortModule,
+    ExportAsModule
   ],
   exports: [RouterModule],
-  providers: [SharedService],
+  providers: [SharedService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

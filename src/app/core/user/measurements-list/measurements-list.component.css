@@ -6,14 +6,58 @@
 }
 
 mat-card {
-  border-radius: 15px; /* Nagyobb sugárú sarkok */
-  box-shadow: 0px 8px 84px rgba(255, 0, 0, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(255, 0, 0, 0.849), 0 6px 20px 0 rgb(255, 0, 0);
   transition: transform 0.3s ease; /* Animáció a hoverre */
   display: flex;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 5px; /* Opcionális: További hely hagyása a táblázat alatt */
+}
+
+.search-container input {
+  margin-right: 10px; /* Opcionális: Elmozdítja a gombtól */
 }
 
 .measurement-table {
   max-width: 100%; /* Maximális szélesség beállítása a szülőelemhez képest */
   width: 1000px; /* Például az oldal 90%-ának kitöltése */
+  border-radius: 24px; /* Lekerekítés */
+  overflow: hidden; /* Lekerekítés túlcsordulása esetén */
 }
   
+th {
+  font-size: 18px;
+}
+
+tr {
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .mat-table {
+    overflow-x: auto;
+    display: block;
+  }
+
+  .measurement-table {
+    width: 50%;
+  }
+
+  .mat-table.mat-elevation-z8 {
+    box-shadow: none;
+  }
+}
+
+@media (max-height: 600px) {
+  .container {
+    margin-top: 30px; /* Kisebb margó a táblázat és a kijelző széle között */
+  }
+
+  .measurement-table {
+    width: 10%;
+  }
+}

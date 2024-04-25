@@ -8,7 +8,7 @@
     <mat-card class="pulse-info">
       <div class="time-label">
         <span>Mérés ideje:</span>
-        <span>{{ lastMeasurementTime }}</span>
+        <span class="measurement-time">{{ lastMeasurementTime }}</span>
       </div>
       <div class="pulse-content">
         <div class="pulse-icon">
@@ -22,10 +22,16 @@
 
     <mat-card class="data-info">
       <div class="data-item">
+        Az elmúlt órában mért adatok száma: <span>{{ hourlysMeasurementCount }}</span>
+      </div>
+      <div class="data-item">
         A mai nap mért adatok száma: <span>{{ todaysMeasurementCount }}</span>
       </div>
       <div class="data-item">
         A héten mért adatok száma: <span>{{ weeklyMeasurementCount }}</span>
+      </div>
+      <div class="data-item">
+        A hónapban mért adatok száma: <span>{{ monthlysMeasurementCount }}</span>
       </div>
       <div class="data-item">
         Összes mérések száma: <span>{{ totalMeasurementCount }}</span>
@@ -34,10 +40,10 @@
 
     <mat-card class="average-pulse">
       <mat-card-content>
-        <p>Átlagos pulzus: {{ averagePulse }}</p>
-        <p>Szórás: {{ pulseVariance }}</p>
-        <p>Max: {{ maxPulse }}</p>
-        <p>Min: {{ minPulse }}</p>
+        <p><span class="label">Átlagos pulzus:</span> <span class="value"><b>{{ averagePulse }}</b></span></p>
+        <p><span class="label">Pulzus szórása:</span> <span class="value"><b>{{ pulseVariance }}</b></span></p>
+        <p><span class="label">Legamagabb pulzus:</span> <span class="value"><b>{{ maxPulse }}</b></span></p>
+        <p><span class="label">Legkisebb pulzus:</span> <span class="value"><b>{{ minPulse }}</b></span></p>
       </mat-card-content>
     </mat-card>
   </div>

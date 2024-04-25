@@ -6,7 +6,7 @@
   background-position: 20% 30%;
   height: calc(100vh - 60px);  
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 }
 
@@ -24,12 +24,12 @@
   right: 10%;
   width: 90%;
   max-width: 300px;
-  padding: 40px;
+  padding: 5vh;
 }
 
 @media screen and (max-width: 600px) {
   .login-form {
-    right: 0;
+     right: 0;
     left: 0;
     top: 25%;
     margin: 0 auto;
@@ -37,12 +37,16 @@
 }
 
 mat-form-field {
-  flex: 1;
   width: 100%;
-  
 }
 
 button {
   width: 100%;
   margin-top: 15px;
+}
+
+@media (orientation: landscape) {
+  .login-form {
+    margin-top: 30px; /* Kisebb margó a táblázat és a kijelző széle között */
+  }
 }
