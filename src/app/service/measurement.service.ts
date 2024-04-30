@@ -13,18 +13,33 @@ export class MeasurementService {
 
   constructor(private auth: AngularFirestore) { }
 
+  private adjustTimestamp(timestamp: Date): Date {
+    return new Date(timestamp.getTime() - (2 * 60 * 60 * 1000)); // 2 óra = 2 * 60 perc * 60 másodperc * 1000 milliszekundum
+  }
+
   getMeasurementsByUserId(userId: string): Observable<any[]> {
     return this.auth.collection('Measurements', ref => ref.where('userId', '==', userId))
-      .valueChanges();
+      .valueChanges()
+      .pipe(
+        map((measurements: any[]) => measurements.map(measurement => ({
+          ...measurement,
+          timestamp: this.adjustTimestamp(new Date(measurement.timestamp.seconds * 1000))
+        })))
+      );
   }
 
   getMeasurementsForCurrentHour(userId: string): Observable<any[]> {
     const currentHourStart = startOfHour(new Date()); // Az aktuális óra kezdete
     const currentHourEnd = endOfHour(new Date()); // Az aktuális óra vége
+    
+    // Az időbélyegként tárolt idő későbbi időpontra való módosítása
+    const currentHourStartAdjusted = new Date(currentHourStart.getTime() + (2 * 60 * 60 * 1000));
+    const currentHourEndAdjusted = new Date(currentHourEnd.getTime() + (2 * 60 * 60 * 1000));
+    
     return this.auth.collection('Measurements', ref => ref
         .where('userId', '==', userId)
-        .where('timestamp', '>=', currentHourStart)
-        .where('timestamp', '<=', currentHourEnd))
+        .where('timestamp', '>=', currentHourStartAdjusted)
+        .where('timestamp', '<=', currentHourEndAdjusted))
       .valueChanges()
       .pipe(
         tap(measurements => console.log('Measurements for current hour:', measurements))

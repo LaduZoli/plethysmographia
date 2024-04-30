@@ -4,7 +4,7 @@
   background-size: 20%;
   background-repeat: no-repeat; 
   background-position: 20% 30%;
-  height: calc(100vh - 60px);  
+  height: calc(100vh - 64px);
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -25,9 +25,14 @@
   width: 90%;
   max-width: 300px;
   padding: 40px;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 600px) {
+  .mat-container {
+    width: 102.5%;
+    height: 100vh;
+  }
   .register-form {
     right: 0;
     left: 0;
@@ -46,8 +51,11 @@ button {
   margin-top: 15px;
 }
 
-@media (orientation: landscape) {
+@media screen and (max-height: 600px) {
+  .mat-container {
+    height: 150vh;
+  }
   .register-form {
-    margin-top: 250px; /* Kisebb margó a táblázat és a kijelző széle között */
+    margin-top: 25px; /* Kisebb margó a táblázat és a kijelző széle között */
   }
 }

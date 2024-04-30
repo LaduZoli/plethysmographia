@@ -53,7 +53,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
         this.measurementService.getMeasurementsByUserId(currentUserUid).subscribe(measurements => {
           // Adatok rendezése a timestamp alapján
           measurements.sort((a, b) => {
-            return a.timestamp.toDate() - b.timestamp.toDate();
+            return a.timestamp - b.timestamp;
           });
 
           this.measurementService.getMeasurementsForCurrentHour(currentUserUid).subscribe(measurements => {
@@ -81,7 +81,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
 
           // Események létrehozása a naptárhoz
           this.events = measurements.map(measurement => ({
-            start: measurement.timestamp.toDate(),
+            start: measurement.timestamp,
             title: 'Measurement',
             color: {
               primary: '#ff0000', // Piros szív
@@ -99,7 +99,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
             const currentTime = new Date();
           
             // Az utolsó mérés időpontjának lekérése
-            const lastMeasurementTime = lastMeasurement.timestamp.toDate();
+            const lastMeasurementTime = lastMeasurement.timestamp;
           
             // Az eltelt idő meghatározása milliszekundumban
             const elapsedTimeInMillis = currentTime.getTime() - lastMeasurementTime.getTime();
@@ -109,10 +109,12 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
             const elapsedHours = Math.floor(elapsedMinutes / 60);
           
             // A megfelelő üzenet kiválasztása és formázása
-            if (elapsedMinutes < 60) {
-              this.lastMeasurementTime = `${elapsedMinutes} perccel ezelőtt`;
+            if (elapsedMinutes === 0) {
+              this.lastMeasurementTime = 'Jelenleg';
+            } else if (elapsedMinutes < 60) {
+                this.lastMeasurementTime = `${elapsedMinutes} perccel ezelőtt`;
             } else {
-              this.lastMeasurementTime = `${elapsedHours} órával ezelőtt`;
+                this.lastMeasurementTime = `${elapsedHours} órával ezelőtt`;
             }
           }
           
@@ -123,7 +125,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
           const pulseData = measurements.map(measurement => measurement.measurement);
           // Dátumok formázása a kívánt formátumba
           const timestampData = measurements.map(measurement => {
-            const date = measurement.timestamp.toDate();
+            const date = measurement.timestamp;
             return `${date.getFullYear()} ${date.toString().split(' ').slice(1, 4).join(' ')} ${date.toLocaleTimeString()}`;
           });
         
@@ -146,22 +148,30 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
 
   // Átlagpulzus kiszámítása
   private calculateAveragePulse(measurements: any[]): void {
+    if (measurements.length === 0) {
+      this.averagePulse = 0;
+      this.pulseVariance = 0;
+      this.maxPulse = 0;
+      this.minPulse = 0;
+      return;
+    }
+    
     // Összegzés az összes pulzusértékhez
     const sum = measurements.reduce((total, measurement) => total + measurement.measurement, 0);
     // Átlagpulzus kiszámítása
-    this.averagePulse = sum / measurements.length;
-
+    this.averagePulse = +(sum / measurements.length).toFixed(1);
+  
     // Négyzetes eltérések kiszámítása
-  const squaredDifferences = measurements.map(measurement => Math.pow(measurement.measurement - this.averagePulse, 2));
-  // Szórásnégyzet kiszámítása
-  const variance = squaredDifferences.reduce((total, squaredDifference) => total + squaredDifference, 0) / measurements.length;
-  // Szórás kiszámítása
-  this.pulseVariance = parseFloat(Math.sqrt(variance).toFixed(2));
-
-  // A legnagyobb mért érték keresése
-  this.maxPulse = Math.max(...measurements.map(measurement => measurement.measurement));
-  // A legkisebb mért érték keresése
-  this.minPulse = Math.min(...measurements.map(measurement => measurement.measurement));
+    const squaredDifferences = measurements.map(measurement => Math.pow(measurement.measurement - this.averagePulse, 2));
+    // Szórásnégyzet kiszámítása
+    const variance = squaredDifferences.reduce((total, squaredDifference) => total + squaredDifference, 0) / measurements.length;
+    // Szórás kiszámítása
+    this.pulseVariance = parseFloat(Math.sqrt(variance).toFixed(2));
+  
+    // A legnagyobb mért érték keresése
+    this.maxPulse = Math.max(...measurements.map(measurement => measurement.measurement));
+    // A legkisebb mért érték keresése
+    this.minPulse = Math.min(...measurements.map(measurement => measurement.measurement));
   }
 
   ngAfterViewInit(): void {

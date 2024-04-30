@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-measurements-list',
@@ -21,6 +22,7 @@ export class MeasurementsListComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild('measurementTable', { static: false }) measurementTable!: ElementRef;
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   constructor(
     private sharedService: SharedService,
@@ -38,30 +40,19 @@ export class MeasurementsListComponent implements OnInit {
 
     this.measurementsDataSource.filterPredicate = (data: any, filter: string) => {
       const searchText = filter.trim();
-    
-      // Dátum és idő string
-      const timestampString = this.datePipe.transform(data.timestamp.toDate(), 'yyyy-MM-dd HH:mm', 'local') || '';
-    
-      // Pulzus érték string
+      const timestampString = this.datePipe.transform(data.timestamp, 'yyyy-MM-dd HH:mm', 'local') || '';
       const pulseString = data.measurement.toString();
-    
-      // Dátum és idő szűrése
       const dateTimeFilter = timestampString.includes(searchText);
-    
-      // Pulzus szűrése
       const pulseFilter = pulseString.includes(searchText);
-    
-      // Lebegőpontos számok szűrése
       const floatFilter = !isNaN(parseFloat(searchText)) && pulseString.includes(parseFloat(searchText).toString());
-    
-      // Minden adatkomponensre történő szűrés
       return dateTimeFilter || pulseFilter || floatFilter;
     };
-    
+
     this.authService.getCurrentUserUid().subscribe(currentUserUid => {
       if (currentUserUid) {
         this.measurementService.getMeasurementsByUserId(currentUserUid).subscribe(measurements => {
           this.measurementsDataSource.data = measurements;
+          this.measurementsDataSource.paginator = this.paginator; // hozzáadva
         });
       }
     });
@@ -71,60 +62,38 @@ export class MeasurementsListComponent implements OnInit {
 
   search() {
     if (!this.searchText) {
-      // Ha a keresőmező üres, töröljük a szűrést
       this.measurementsDataSource.filter = '';
       return;
     }
   
-    let filterValue: string = this.searchText.trim().toLowerCase(); // Keresőmező értékének kisbetűssé alakítása és szóközök levágása
-    
-    // Az eredeti filterPredicate használata
+    let filterValue: string = this.searchText.trim().toLowerCase();
     this.measurementsDataSource.filterPredicate = (data: any, filter: string) => {
       const searchText = filter.trim();
-    
-      // Dátum és idő string
-      const timestampString = this.datePipe.transform(data.timestamp.toDate(), 'yyyy-MM-dd HH:mm', 'local') || '';
-    
-      // Pulzus érték string
+      const timestampString = this.datePipe.transform(data.timestamp, 'yyyy-MM-dd HH:mm', 'local') || '';
       const pulseString = data.measurement.toString();
-    
-      // Dátum és idő szűrése
       const dateTimeFilter = timestampString.includes(searchText);
-    
-      // Pulzus szűrése
       const pulseFilter = pulseString.includes(searchText);
-    
-      // Lebegőpontos számok szűrése
       const floatFilter = !isNaN(parseFloat(searchText)) && pulseString.includes(parseFloat(searchText).toString());
-    
-      // Minden adatkomponensre történő szűrés
       return dateTimeFilter || pulseFilter || floatFilter;
     };
-  
-    // Szűrés az időbélyeg és a pulzus alapján
     this.measurementsDataSource.filter = filterValue;
   }
 
   exportAsCSV() {
+    const tableContent = this.measurementTable.nativeElement.innerHTML;
+
     const options: ExportAsConfig = {
       type: 'csv',
-      elementIdOrContent: 'measurement-table',
+      elementIdOrContent: tableContent, // <-- exportálni kívánt elem azonosítója
       options: { /* CSV beállítások */ }
     };
-    // Az Observable-t Promise-vé alakítjuk
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
-
-    // Most már használhatjuk a then és catch metódusokat
     exportPromise.then((content) => {
       console.log('Exportált adatok:', content);
-      this.snackBar.open('Exportálás CSV formátumban...', 'Bezárás', {
-        duration: 3000, // Az üzenet megjelenési ideje milliszekundumban
-      });
+      this.snackBar.open('Exportálás CSV formátumban...', 'Bezárás', { duration: 3000 });
     }).catch((error) => {
       console.error('Hiba az exportálás során:', error);
-      this.snackBar.open('Hiba az exportálás során...', 'Bezárás', {
-        duration: 3000, // Az üzenet megjelenési ideje milliszekundumban
-      });
+      this.snackBar.open('Hiba az exportálás során...', 'Bezárás', { duration: 3000 });
     });
   }
 
@@ -134,20 +103,13 @@ export class MeasurementsListComponent implements OnInit {
       elementIdOrContent: 'measurement-table',
       options: { /* pdf beállítások */ }
     };
-    // Az Observable-t Promise-vé alakítjuk
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
-
-    // Most már használhatjuk a then és catch metódusokat
     exportPromise.then((content) => {
       console.log('Exportált adatok:', content);
-      this.snackBar.open('Exportálás DOC formátumban...', 'Bezárás', {
-        duration: 3000, // Az üzenet megjelenési ideje milliszekundumban
-      });
+      this.snackBar.open('Exportálás DOC formátumban...', 'Bezárás', { duration: 3000 });
     }).catch((error) => {
       console.error('Hiba az exportálás során:', error);
-      this.snackBar.open('Hiba az exportálás során...', 'Bezárás', {
-        duration: 3000, // Az üzenet megjelenési ideje milliszekundumban
-      });
+      this.snackBar.open('Hiba az exportálás során...', 'Bezárás', { duration: 3000 });
     });
   }
 
@@ -157,20 +119,13 @@ export class MeasurementsListComponent implements OnInit {
       elementIdOrContent: 'measurement-table',
       options: { /* pdf beállítások */ }
     };
-    // Az Observable-t Promise-vé alakítjuk
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
-
-    // Most már használhatjuk a then és catch metódusokat
     exportPromise.then((content) => {
       console.log('Exportált adatok:', content);
-      this.snackBar.open('Exportálás PDF formátumban...', 'Bezárás', {
-        duration: 3000, // Az üzenet megjelenési ideje milliszekundumban
-      });
+      this.snackBar.open('Exportálás PDF formátumban...', 'Bezárás', { duration: 3000 });
     }).catch((error) => {
       console.error('Hiba az exportálás során:', error);
-      this.snackBar.open('Hiba az exportálás során...', 'Bezárás', {
-        duration: 3000, // Az üzenet megjelenési ideje milliszekundumban
-      });
+      this.snackBar.open('Hiba az exportálás során...', 'Bezárás', { duration: 3000 });
     });
   }
 
@@ -180,20 +135,13 @@ export class MeasurementsListComponent implements OnInit {
       elementIdOrContent: 'measurement-table',
       options: { /* pdf beállítások */ }
     };
-    // Az Observable-t Promise-vé alakítjuk
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
-
-    // Most már használhatjuk a then és catch metódusokat
     exportPromise.then((content) => {
       console.log('Exportált adatok:', content);
-      this.snackBar.open('Exportálás PNG formátumban...', 'Bezárás', {
-        duration: 3000, // Az üzenet megjelenési ideje milliszekundumban
-      });
+      this.snackBar.open('Exportálás PNG formátumban...', 'Bezárás', { duration: 3000 });
     }).catch((error) => {
       console.error('Hiba az exportálás során:', error);
-      this.snackBar.open('Hiba az exportálás során...', 'Bezárás', {
-        duration: 3000, // Az üzenet megjelenési ideje milliszekundumban
-      });
+      this.snackBar.open('Hiba az exportálás során...', 'Bezárás', { duration: 3000 });
     });
   }
 }

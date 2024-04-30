@@ -4,7 +4,7 @@
     background-size: 20%;
     background-repeat: no-repeat; 
     background-position: 85% 30%;
-    height: calc(100vh - 60px);   
+    height: calc(100vh - 64px);
 }
 
 .mat-container h1 {
@@ -21,3 +21,16 @@
     padding-left: 25px;
     margin: 0;
 }
+
+@media screen and (max-width: 600px) {
+    .mat-container {
+        height: 100%;
+        width: 102%;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .mat-container {
+        height: auto;
+    }
+  }

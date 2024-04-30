@@ -1,8 +1,12 @@
+.mat-toolbar {
+  display: flex;
+}
+
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1;
 }
 
 .button-margin {
-  margin-left: 15px; 
-  margin-right: 15px; 
+  margin-left: 15px;
+  margin-right: 15px;
 }
