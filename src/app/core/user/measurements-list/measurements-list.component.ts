@@ -21,7 +21,6 @@ export class MeasurementsListComponent implements OnInit {
   searchText: string = '';
 
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-  @ViewChild('measurementTable', { static: false }) measurementTable!: ElementRef;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   constructor(
@@ -80,12 +79,10 @@ export class MeasurementsListComponent implements OnInit {
   }
 
   exportAsCSV() {
-    const tableContent = this.measurementTable.nativeElement.innerHTML;
-
     const options: ExportAsConfig = {
       type: 'csv',
-      elementIdOrContent: tableContent, // <-- exportálni kívánt elem azonosítója
-      options: { /* CSV beállítások */ }
+      elementIdOrContent: 'measurement-table', // <-- exportálni kívánt elem azonosítója
+      options: {}
     };
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
     exportPromise.then((content) => {
@@ -97,16 +94,16 @@ export class MeasurementsListComponent implements OnInit {
     });
   }
 
-  exportAsDOC() {
+  exportAsTXT() {
     const options: ExportAsConfig = {
-      type: 'doc',
+      type: 'txt',
       elementIdOrContent: 'measurement-table',
-      options: { /* pdf beállítások */ }
+      options: {},
     };
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
     exportPromise.then((content) => {
       console.log('Exportált adatok:', content);
-      this.snackBar.open('Exportálás DOC formátumban...', 'Bezárás', { duration: 3000 });
+      this.snackBar.open('Exportálás TXT formátumban...', 'Bezárás', { duration: 3000 });
     }).catch((error) => {
       console.error('Hiba az exportálás során:', error);
       this.snackBar.open('Hiba az exportálás során...', 'Bezárás', { duration: 3000 });
@@ -117,7 +114,7 @@ export class MeasurementsListComponent implements OnInit {
     const options: ExportAsConfig = {
       type: 'pdf',
       elementIdOrContent: 'measurement-table',
-      options: { /* pdf beállítások */ }
+      options: {}
     };
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
     exportPromise.then((content) => {

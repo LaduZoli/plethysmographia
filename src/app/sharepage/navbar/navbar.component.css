@@ -1,5 +1,6 @@
 .mat-toolbar {
   display: flex;
+  width: 100%;
 }
 
 .example-spacer {
