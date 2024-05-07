@@ -14,7 +14,7 @@ export class MeasurementService {
   constructor(private auth: AngularFirestore) { }
 
   private adjustTimestamp(timestamp: Date): Date {
-    return new Date(timestamp.getTime() - (2 * 60 * 60 * 1000)); // 2 óra = 2 * 60 perc * 60 másodperc * 1000 milliszekundum
+    return new Date(timestamp.getTime() - (2 * 60 * 60 * 1000));
   }
 
   getMeasurementsByUserId(userId: string): Observable<any[]> {
@@ -29,10 +29,9 @@ export class MeasurementService {
   }
 
   getMeasurementsForCurrentHour(userId: string): Observable<any[]> {
-    const currentHourStart = startOfHour(new Date()); // Az aktuális óra kezdete
-    const currentHourEnd = endOfHour(new Date()); // Az aktuális óra vége
+    const currentHourStart = startOfHour(new Date()); 
+    const currentHourEnd = endOfHour(new Date()); 
     
-    // Az időbélyegként tárolt idő későbbi időpontra való módosítása
     const currentHourStartAdjusted = new Date(currentHourStart.getTime() + (2 * 60 * 60 * 1000));
     const currentHourEndAdjusted = new Date(currentHourEnd.getTime() + (2 * 60 * 60 * 1000));
     
@@ -47,8 +46,8 @@ export class MeasurementService {
   }
 
   getTodaysMeasurements(userId: string): Observable<any[]> {
-    const todayStart = startOfDay(new Date()); // Mai nap kezdete
-    const todayEnd = endOfDay(new Date()); // Mai nap vége
+    const todayStart = startOfDay(new Date()); 
+    const todayEnd = endOfDay(new Date()); 
     return this.auth.collection('Measurements', ref => ref
         .where('userId', '==', userId)
         .where('timestamp', '>=', todayStart)
@@ -60,8 +59,8 @@ export class MeasurementService {
   }
   
   getWeeklyMeasurements(userId: string): Observable<any[]> {
-    const weekStart = startOfWeek(new Date()); // A jelenlegi hét kezdete
-    const weekEnd = endOfWeek(new Date()); // A jelenlegi hét vége
+    const weekStart = startOfWeek(new Date()); 
+    const weekEnd = endOfWeek(new Date()); 
     return this.auth.collection('Measurements', ref => ref
         .where('userId', '==', userId)
         .where('timestamp', '>=', weekStart)
@@ -71,8 +70,8 @@ export class MeasurementService {
   }
 
   getMeasurementsForCurrenttMonth(userId: string): Observable<any[]> {
-    const currentHourStart = startOfMonth(new Date()); // Az aktuális óra kezdete
-    const currentHourEnd = endOfMonth(new Date()); // Az aktuális óra vége
+    const currentHourStart = startOfMonth(new Date()); 
+    const currentHourEnd = endOfMonth(new Date()); 
     return this.auth.collection('Measurements', ref => ref
         .where('userId', '==', userId)
         .where('timestamp', '>=', currentHourStart)
@@ -83,7 +82,6 @@ export class MeasurementService {
       );
   }
 
-  // Az összes mérési adat lekérése
   getAllMeasurements(userId: string): Observable<any[]> {
     return this.auth.collection('Measurements', ref => ref.where('userId', '==', userId))
       .valueChanges()

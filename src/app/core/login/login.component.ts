@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
   login() {
     this.isLoggingIn = true;
     this.loginError = false;
@@ -45,7 +44,6 @@ export class LoginComponent implements OnInit {
     (error) => {
       console.error('Authentication failed:', error);
       this.isLoggingIn = false;
-      // alert("Hibás adatok!");
       this.loginError = true; 
     });
   }

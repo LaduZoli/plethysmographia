@@ -51,7 +51,7 @@ export class MeasurementsListComponent implements OnInit {
       if (currentUserUid) {
         this.measurementService.getMeasurementsByUserId(currentUserUid).subscribe(measurements => {
           this.measurementsDataSource.data = measurements;
-          this.measurementsDataSource.paginator = this.paginator; // hozzáadva
+          this.measurementsDataSource.paginator = this.paginator; 
         });
       }
     });
@@ -81,7 +81,7 @@ export class MeasurementsListComponent implements OnInit {
   exportAsCSV() {
     const options: ExportAsConfig = {
       type: 'csv',
-      elementIdOrContent: 'measurement-table', // <-- exportálni kívánt elem azonosítója
+      elementIdOrContent: 'measurement-table',
       options: {}
     };
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
@@ -130,7 +130,7 @@ export class MeasurementsListComponent implements OnInit {
     const options: ExportAsConfig = {
       type: 'png',
       elementIdOrContent: 'measurement-table',
-      options: { /* pdf beállítások */ }
+      options: {}
     };
     const exportPromise = this.exportAsService.save(options, 'measurements').toPromise();
     exportPromise.then((content) => {

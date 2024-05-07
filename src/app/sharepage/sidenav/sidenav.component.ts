@@ -24,9 +24,8 @@ export class SidenavComponent implements OnInit{
   constructor(private authService : AuthService,  private router: Router) {}
 
   ngOnInit(): void {
-    this.userDisplayName! = this.authService.getUserDisplayName(); // Feliratkozunk az observable-re
+    this.userDisplayName! = this.authService.getUserDisplayName(); 
   }
-
 
   logout() {
     this.authService.logout().then(() => {

@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CoreComponent } from './core/core.component';
 import { HomeComponent } from './core/home/home.component';
-import { FooterComponent } from './sharepage/footer/footer.component';
 import { NavbarComponent } from './sharepage/navbar/navbar.component';
 import { LoginComponent } from './core/login/login.component';
 import { MaterialModule } from './material-module';
@@ -36,7 +35,6 @@ import { DatePipe } from '@angular/common';
     PageNotFoundComponent,
     CoreComponent,
     HomeComponent,
-    FooterComponent,
     NavbarComponent,
     LoginComponent,
     SidenavComponent,

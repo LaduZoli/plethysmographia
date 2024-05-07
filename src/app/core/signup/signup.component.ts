@@ -57,11 +57,10 @@ export class SignupComponent implements OnInit {
       this.registerForm.value.email,
       this.registerForm.value.password
     ).subscribe((userData: any) => {
-      const userUid = userData.user.uid; // Firebase Authentication által visszaadott UID
+      const userUid = userData.user.uid;
       const userName = this.registerForm.value.name;
       const userEmail = this.registerForm.value.email;
   
-      // Most létrehozhatod a felhasználó dokumentumot a Firestore-ban
       this.userService.addUser(userUid, userName, userEmail)
         .then(() => {
           this.router.navigate(['login']);

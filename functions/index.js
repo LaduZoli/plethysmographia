@@ -11,13 +11,10 @@ admin.initializeApp({
   databaseURL: "https://plethysmographia-default-rtdb.europe-west1.firebasedatabase.app",
 });
 
-// JSON middleware beállítása
 app.use(bodyParser.json());
 
-// Firestore inicializálása
 const db = admin.firestore();
 
-// POST kérés kezelése
 app.post("/api/pulse", async (req, res) => {
   try {
     const timestamp = new Date(req.body.timestamp);
@@ -36,5 +33,4 @@ app.post("/api/pulse", async (req, res) => {
   }
 });
 
-// Export the api to Firebase Cloud Functions
 exports.app = functions.https.onRequest(app);

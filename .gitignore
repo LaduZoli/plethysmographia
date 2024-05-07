@@ -38,7 +38,14 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+.github/
+.firebase/
+.vscode/
 
 # System files
 .DS_Store
 Thumbs.db
+.gitignore
+.firebaserc
+.editorconfig
+.browserlistinc

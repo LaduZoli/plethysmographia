@@ -14,7 +14,6 @@ export class AuthService {
     private userService: UserService
   ) { }
 
-   // Ezzel a metódussal lekérheted a bejelentkezett felhasználó nevét
    getUserDisplayName(): Observable<string> {
     return this.auth.authState.pipe(
       switchMap(user => {
@@ -48,14 +47,11 @@ export class AuthService {
     return new Observable((observer) => {
       this.auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          const userUid = userCredential.user?.uid; // Firebase Authentication által visszaadott UID
-          if (userUid) { // Ellenőrizzük, hogy userUid nem undefined
-            // Sikeres regisztráció esetén a felhasználó bejelentkeztetése vagy más műveletek
-            // Például: felhasználó név beállítása
+          const userUid = userCredential.user?.uid;
+          if (userUid) { 
             userCredential.user?.updateProfile({
               displayName: name
             }).then(() => {
-              // Felhasználó regisztrálása a Firestore-ban
               this.userService.addUser(userUid, name, email)
                 .then(() => {
                   observer.next(userCredential);
@@ -75,7 +71,6 @@ export class AuthService {
           }
         })
         .catch((error) => {
-          // Hiba kezelése regisztráció közben
           observer.error(error);
           observer.complete();
         });

@@ -56,6 +56,6 @@ button {
     height: 150vh;
   }
   .register-form {
-    margin-top: 25px; /* Kisebb margó a táblázat és a kijelző széle között */
+    margin-top: 25px;
   }
 }

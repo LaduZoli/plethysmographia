@@ -12,7 +12,7 @@ export class UserService {
 
   addUser(uid: string, name: string, email: string): Promise<void> {
     return this.auth.collection('Users').doc(uid).set({
-      id: uid, // Az UID-t használjuk
+      id: uid, 
       name: name,
       email: email,
     });

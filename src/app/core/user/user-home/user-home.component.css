@@ -4,8 +4,8 @@
 
 .card-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Rugalmasan igazítjuk a kártyák szélességét */
-  gap: 50px; /* Térköz a grid elemek között */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 50px; 
   justify-content: space-between; 
 }
 
@@ -17,7 +17,7 @@ mat-card {
 }
 
 .card-wrapper > mat-card:nth-child(4) {
-  grid-column: 2 / 3; /* A negyedik elem legyen a második oszlopban */
+  grid-column: 2 / 3;
 }
 
 mat-card:hover {
@@ -33,14 +33,14 @@ mat-card:hover {
   padding: 20px;
   background-color: #ffffff;
   display: grid;
-  place-items: center; /* Középre igazítás */
+  place-items: center;
 }
 
 .time-label {
   font-size: 18px;
-  display: flex; /* Flexbox elrendezés */
-  flex-direction: column; /* Tartalmat oszlopos elrendezésre állítjuk be */
-  align-items: center; /* Elemek középre igazítása a függőleges tengelyen */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
 }
 
 .measurement-time {
@@ -74,14 +74,14 @@ mat-card:hover {
 .data-info {
   padding: 20px;
   display: flex;
-  justify-content: center; /* Tartalom középre igazítása */
-  align-items: center; /* Elemek középre igazítása a függőleges tengelyen */
-  text-align: center; /* Szöveg középre igazítása */
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
 }
 
 .data-item {
   font-size: 16px;
-  margin-bottom: 10px; /* Térköz a data-item elemek között */
+  margin-bottom: 10px; 
 }
 
 .data-item span {
@@ -91,22 +91,22 @@ mat-card:hover {
 .average-pulse {
   padding: 20px;
   display: flex;
-  justify-content: center; /* Tartalom középre igazítása */
-  align-items: center; /* Elemek középre igazítása a függőleges tengelyen */
-  text-align: center; /* Szöveg középre igazítása */
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
 }
 
 .average-pulse p {
   font-size: 16px;
-  margin-bottom: 10px; /* Térköz a bekezdések között */
+  margin-bottom: 10px; 
 }
 
 .bold {
-  font-weight: bold; /* Csak a vastag betűs elemek számára */
+  font-weight: bold; 
 }
 
 .average-pulse p:last-child {
-  margin-bottom: 0; /* Az utolsó bekezdésnek nincs alsó térköz */
+  margin-bottom: 0;
 }
 
 .average-pulse-content {
@@ -121,13 +121,13 @@ mat-card:hover {
 
   .card-wrapper {
     display: flex;
-    flex-wrap: wrap; /* Hozzáadva: törjön sort, ha elfogy a hely */
+    flex-wrap: wrap;
     justify-content: center;
   }
 
   mat-card {
     margin-bottom: 20px;
     text-align: center;
-    width: calc(100% - 20px); /* Hozzáadva: a kártyák teljes szélessége a térközök miatt */
+    width: calc(100% - 20px); 
   }
 }
